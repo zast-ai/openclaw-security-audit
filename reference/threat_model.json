@@ -1,0 +1,215 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "source": "ZAST.AI OpenClaw Security Handbook",
+    "framework": "MITRE ATLAS",
+    "total_checks": 80,
+    "total_threats": 27,
+    "total_attack_surfaces": 12
+  },
+  "attack_surfaces": {
+    "AS-1": {
+      "name": "Gateway Exposure",
+      "handbook_sections": ["§2"],
+      "check_ids": ["GW-001","GW-002","GW-003","GW-004","GW-005","GW-006","GW-007","GW-008","GW-009","GW-010","GW-011","GW-012","GW-013","NE-001","NE-002","NE-003","NE-004","NE-005","NE-006","NE-007","NE-008","NE-009"]
+    },
+    "AS-2": {
+      "name": "Message Channels",
+      "handbook_sections": ["§3"],
+      "check_ids": ["CH-001","CH-002","CH-003","CH-004","CH-005","CH-006","CH-007","CH-008","CH-009"]
+    },
+    "AS-3": {
+      "name": "Prompt Injection",
+      "handbook_sections": ["§5"],
+      "check_ids": ["SM-001","AB-001","GW-011"]
+    },
+    "AS-4": {
+      "name": "Business Document Injection",
+      "handbook_sections": ["§3.12"],
+      "check_ids": ["AB-006"]
+    },
+    "AS-5": {
+      "name": "Skill & Supply Chain",
+      "handbook_sections": ["§4","§9"],
+      "check_ids": ["SK-001","SK-002","SK-003","SK-004","SK-005","SK-006","SK-007","SK-008","SK-009","SK-010","SK-011","SK-012"]
+    },
+    "AS-6": {
+      "name": "Data Exfiltration",
+      "handbook_sections": ["§5.3","§8.2"],
+      "check_ids": ["CL-001","CL-002","CL-003","CL-004","CL-005","CL-006","CL-007","CL-008","AB-007","NE-005"]
+    },
+    "AS-7": {
+      "name": "File System & Credentials",
+      "handbook_sections": ["§6"],
+      "check_ids": ["FP-001","FP-002","FP-003","FP-004","FP-005","FP-006","FP-007","FP-008","FP-009","FP-010"]
+    },
+    "AS-8": {
+      "name": "Sandbox Escape",
+      "handbook_sections": ["§7","§8.1"],
+      "check_ids": ["SB-001","SB-002","SB-003","SB-004","SB-005","SB-006","SB-007","SB-008","SB-009","SB-010","SB-011"]
+    },
+    "AS-9": {
+      "name": "Network / SSRF",
+      "handbook_sections": ["§8","§9.6"],
+      "check_ids": ["NE-008","NE-009","SB-003"]
+    },
+    "AS-10": {
+      "name": "Agent Behavior Abuse",
+      "handbook_sections": ["§10"],
+      "check_ids": ["AB-001","AB-002","AB-003","AB-004","AB-005","AB-006","AB-007","AB-008"]
+    },
+    "AS-11": {
+      "name": "CI/CD Supply Chain",
+      "handbook_sections": ["§9.6"],
+      "check_ids": ["SB-011","SK-011"]
+    },
+    "AS-12": {
+      "name": "Windows-Specific",
+      "handbook_sections": ["§9.4"],
+      "check_ids": ["WIN-001","WIN-002"]
+    }
+  },
+  "threat_ids": {
+    "T-RECON-001": {
+      "name": "Reconnaissance via public API",
+      "check_ids": ["NE-005","GW-005","GW-006"]
+    },
+    "T-RECON-002": {
+      "name": "Channel enumeration",
+      "check_ids": ["CH-006","CH-007"]
+    },
+    "T-RECON-003": {
+      "name": "Message metadata analysis",
+      "check_ids": ["CH-005"]
+    },
+    "T-ACCESS-001": {
+      "name": "Gateway auth bypass (none mode)",
+      "check_ids": ["GW-001","GW-002"]
+    },
+    "T-ACCESS-002": {
+      "name": "Token theft via config exposure",
+      "check_ids": ["GW-003","GW-004","CL-006"]
+    },
+    "T-ACCESS-003": {
+      "name": "Trusted-proxy bypass",
+      "check_ids": ["GW-007"]
+    },
+    "T-ACCESS-004": {
+      "name": "Malicious Skill installation",
+      "check_ids": ["SK-002","SK-003","SK-004","SK-010"]
+    },
+    "T-ACCESS-005": {
+      "name": "Skill auto-update compromise",
+      "check_ids": ["SK-009"]
+    },
+    "T-ACCESS-006": {
+      "name": "DM policy bypass",
+      "check_ids": ["CH-003"]
+    },
+    "T-EXEC-001": {
+      "name": "Prompt injection via channel message",
+      "check_ids": ["CH-001","CH-002","AB-001"]
+    },
+    "T-EXEC-002": {
+      "name": "Cross-channel info leak exploitation",
+      "check_ids": ["CH-005"]
+    },
+    "T-EXEC-003": {
+      "name": "Sandbox escape via Docker socket",
+      "check_ids": ["SB-001","SB-006"]
+    },
+    "T-EXEC-004": {
+      "name": "Sandbox escape via Linux capabilities",
+      "check_ids": ["SB-004","SB-005"]
+    },
+    "T-EXEC-005": {
+      "name": "Skill code execution (eval/exec/spawn)",
+      "check_ids": ["SK-002","SK-003"]
+    },
+    "T-EXEC-006": {
+      "name": "Agent unrestricted command execution",
+      "check_ids": ["AB-001","AB-002"]
+    },
+    "T-EVADE-001": {
+      "name": "Obfuscated Skill code",
+      "check_ids": ["SK-006"]
+    },
+    "T-EVADE-002": {
+      "name": "Config hot-reload tampering",
+      "check_ids": ["FP-004","FP-007"]
+    },
+    "T-EVADE-003": {
+      "name": "Telemetry/debug info leak",
+      "check_ids": ["GW-009","GW-010"]
+    },
+    "T-EVADE-004": {
+      "name": "Staged payload delivery",
+      "check_ids": ["SK-008"]
+    },
+    "T-PERSIST-001": {
+      "name": "Persistence via cron/launchd/systemd/shell",
+      "check_ids": ["SP-001","SP-002","SP-003","SP-004"]
+    },
+    "T-DISC-001": {
+      "name": "Directory traversal via permissions",
+      "check_ids": ["FP-001","FP-002","FP-003","FP-005"]
+    },
+    "T-DISC-002": {
+      "name": "Cloud sync credential leak",
+      "check_ids": ["FP-008"]
+    },
+    "T-DISC-003": {
+      "name": "Git repository credential leak",
+      "check_ids": ["FP-009"]
+    },
+    "T-DISC-004": {
+      "name": "Shell history credential leak",
+      "check_ids": ["CL-008"]
+    },
+    "T-EXFIL-001": {
+      "name": "Outbound data exfiltration via web fetch",
+      "check_ids": ["AB-007","SB-003"]
+    },
+    "T-EXFIL-002": {
+      "name": "Session log data exposure",
+      "check_ids": ["CL-001","CL-002","CL-003","SM-003","SM-004"]
+    },
+    "T-EXFIL-003": {
+      "name": "Credential theft via Skill",
+      "check_ids": ["SK-003","SK-005"]
+    },
+    "T-IMPACT-001": {
+      "name": "Financial API unauthorized access",
+      "check_ids": ["AB-008"]
+    },
+    "T-IMPACT-002": {
+      "name": "Agent message spam/abuse",
+      "check_ids": ["AB-003"]
+    },
+    "T-IMPACT-003": {
+      "name": "API overconsumption",
+      "check_ids": ["AB-004"]
+    },
+    "T-IMPACT-004": {
+      "name": "Memory poisoning persistence",
+      "check_ids": ["SM-001","SM-002"]
+    },
+    "T-IMPACT-005": {
+      "name": "MCP Server abuse",
+      "check_ids": ["AB-005"]
+    }
+  },
+  "checks_by_module": {
+    "01_file_permissions": ["FP-001","FP-002","FP-003","FP-004","FP-005","FP-006","FP-007","FP-008","FP-009","FP-010"],
+    "02_gateway_config": ["GW-001","GW-002","GW-003","GW-004","GW-005","GW-006","GW-007","GW-008","GW-009","GW-010","GW-011","GW-012","GW-013"],
+    "03_network_exposure": ["NE-001","NE-002","NE-003","NE-004","NE-005","NE-006","NE-007","NE-008","NE-009"],
+    "04_channel_config": ["CH-001","CH-002","CH-003","CH-004","CH-005","CH-006","CH-007","CH-008","CH-009"],
+    "05_credential_leak": ["CL-001","CL-002","CL-003","CL-004","CL-005","CL-006","CL-007","CL-008"],
+    "06_skill_audit": ["SK-001","SK-002","SK-003","SK-004","SK-005","SK-006","SK-007","SK-008","SK-009","SK-010","SK-011","SK-012"],
+    "07_sandbox_docker": ["SB-001","SB-002","SB-003","SB-004","SB-005","SB-006","SB-007","SB-008","SB-009","SB-010","SB-011"],
+    "08_session_memory": ["SM-001","SM-002","SM-003","SM-004","SM-005"],
+    "09_agent_behavior": ["AB-001","AB-002","AB-003","AB-004","AB-005","AB-006","AB-007","AB-008"],
+    "10_system_persistence": ["SP-001","SP-002","SP-003","SP-004"],
+    "11_windows_checks": ["WIN-001","WIN-002"]
+  }
+}
