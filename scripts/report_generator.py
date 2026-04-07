@@ -177,14 +177,14 @@ def generate_markdown_report(results, meta, show_fix=False, checklist=False):
     lines = []
 
     # Header
-    lines.append("# OpenClaw 安全审计报告")
+    lines.append("# OpenClaw Security Audit Report")
     lines.append("")
-    lines.append(f"> 审计时间: {meta.get('audit_time', '')}")
-    lines.append(f"> 目标: {meta.get('target_dir', '~/.openclaw/')}")
-    lines.append(f"> 操作系统: {meta.get('os', 'unknown')} {meta.get('os_version', '')}")
+    lines.append(f"> Audit Time: {meta.get('audit_time', '')}")
+    lines.append(f"> Target: {meta.get('target_dir', '~/.openclaw/')}")
+    lines.append(f"> OS: {meta.get('os', 'unknown')} {meta.get('os_version', '')}")
     oc_ver = meta.get("openclaw_version", "unknown")
-    lines.append(f"> OpenClaw 版本: {oc_ver}")
-    lines.append(f"> 审计工具版本: v{TOOL_VERSION}")
+    lines.append(f"> OpenClaw Version: {oc_ver}")
+    lines.append(f"> Audit Tool Version: v{TOOL_VERSION}")
     lines.append("")
 
     # Summary table
@@ -192,10 +192,10 @@ def generate_markdown_report(results, meta, show_fix=False, checklist=False):
     sev_counts = count_by_severity(results)
     total = len(results)
 
-    lines.append("## 风险统计")
+    lines.append("## Risk Summary")
     lines.append("")
-    lines.append("| 级别 | 数量 | 占比 |")
-    lines.append("|------|------|------|")
+    lines.append("| Severity | Count | Percentage |")
+    lines.append("|----------|-------|------------|")
     for sev in SEVERITY_ORDER:
         c = sev_counts[sev]
         pct = f"{c / total * 100:.1f}%" if total > 0 else "0%"
@@ -220,39 +220,39 @@ def generate_markdown_report(results, meta, show_fix=False, checklist=False):
             continue
 
         icon = _severity_icon(sev)
-        lines.append(f"## {icon} {sev.upper()} 发现")
+        lines.append(f"## {icon} {sev.upper()} Findings")
         lines.append("")
 
         for r in items:
             lines.append(f"### {r['id']}: {r['name']}")
-            lines.append(f"- **严重度**: {sev.upper()}")
-            lines.append(f"- **状态**: {r.get('status', '')}")
+            lines.append(f"- **Severity**: {sev.upper()}")
+            lines.append(f"- **Status**: {r.get('status', '')}")
             if r.get("threat_ids"):
-                lines.append(f"- **攻击面**: {', '.join(r['threat_ids'])}")
+                lines.append(f"- **Attack Surface**: {', '.join(r['threat_ids'])}")
             if r.get("threat_refs"):
-                lines.append(f"- **威胁编号**: {', '.join(r['threat_refs'])}")
+                lines.append(f"- **Threat ID**: {', '.join(r['threat_refs'])}")
             if r.get("handbook_ref"):
-                lines.append(f"- **文档引用**: {r['handbook_ref']}")
+                lines.append(f"- **Reference**: {r['handbook_ref']}")
             if r.get("confidence"):
-                lines.append(f"- **置信度**: {r['confidence']}")
+                lines.append(f"- **Confidence**: {r['confidence']}")
             if r.get("detail"):
-                lines.append(f"- **详情**: {r['detail']}")
+                lines.append(f"- **Detail**: {r['detail']}")
             if r.get("evidence"):
-                lines.append(f"- **证据**: `{r['evidence'][:300]}`")
+                lines.append(f"- **Evidence**: `{r['evidence'][:300]}`")
             if show_fix and r.get("fix_cmd"):
-                lines.append(f"- **修复命令**: `{r['fix_cmd']}`")
+                lines.append(f"- **Fix Command**: `{r['fix_cmd']}`")
             lines.append("")
 
     # Fix commands summary
     if show_fix:
         fix_results = [r for r in results if r.get("fix_cmd") and r.get("status") in (FAIL, WARN)]
         if fix_results:
-            lines.append("## 修复命令汇总")
+            lines.append("## Fix Commands Summary")
             lines.append("")
             lines.append("```bash")
             lines.append("#!/bin/bash")
-            lines.append(f"# OpenClaw 安全加固脚本 — 自动生成于 {meta.get('audit_time', '')}")
-            lines.append("# 请审查后执行")
+            lines.append(f"# OpenClaw Security Hardening Script — Auto-generated at {meta.get('audit_time', '')}")
+            lines.append("# Please review before executing")
             lines.append("")
             for r in fix_results:
                 lines.append(f"# {r['id']}: {r['name']}")
@@ -262,25 +262,25 @@ def generate_markdown_report(results, meta, show_fix=False, checklist=False):
             lines.append("")
 
     # Security advice appendix (items that cannot be auto-detected)
-    lines.append("## 无法自动检测的安全建议（用户教育）")
+    lines.append("## Security Recommendations Beyond Automated Detection (User Education)")
     lines.append("")
-    lines.append("以下场景无法通过 CLI 确定性检查，需要用户手动关注：")
+    lines.append("The following scenarios cannot be verified through CLI deterministic checks and require manual user attention:")
     lines.append("")
-    lines.append("| 场景 | 风险 | 文档引用 | 建议 |")
-    lines.append("|------|------|---------|------|")
-    lines.append("| QR 码钓鱼 | 攻击者伪造配对页面 | §3.6 | 只扫描自己生成的 QR 码 |")
-    lines.append("| 提示注入运行时检测 | 语义攻击无法被传统工具检测 | §5.4 | 仔细审读每个 exec approval |")
-    lines.append("| 业务文档隐藏注入 | 白色文字/注释/OCR | §3.12 | Agent 对文档\"只读不执行\" |")
-    lines.append("| 云模型数据留存 | 对话可能被提供商保留 | §6.3 | 敏感内容使用本地模型 |")
-    lines.append("| Agent 高速失败模式 | 几秒内批量错误操作 | §5.4 | exec.mode = \"ask\" + 监督 |")
-    lines.append("| 社工攻击 | 通过 Agent 共享进行社工 | §3.8 | 不分享 Agent/令牌/配对码 |")
-    lines.append("| 消息元数据泄露 | 通信模式暴露工作习惯 | §3.9 | 定期清理日志 + 本地模型 |")
-    lines.append("| IPv4 八进制 SSRF 绕过 | 0177.0.0.1 绕过内网检测 | §9.6 | 保持 OpenClaw 版本最新 |")
+    lines.append("| Scenario | Risk | Reference | Recommendation |")
+    lines.append("|----------|------|-----------|----------------|")
+    lines.append("| QR Code Phishing | Attacker forges pairing page | §3.6 | Only scan QR codes you generated yourself |")
+    lines.append("| Prompt Injection Runtime Detection | Semantic attacks undetectable by traditional tools | §5.4 | Carefully review every exec approval |")
+    lines.append("| Hidden Injection in Business Documents | White text/comments/OCR | §3.12 | Agent should \"read-only, never execute\" on documents |")
+    lines.append("| Cloud Model Data Retention | Conversations may be retained by provider | §6.3 | Use local models for sensitive content |")
+    lines.append("| Agent High-Speed Failure Mode | Bulk erroneous operations within seconds | §5.4 | exec.mode = \"ask\" + supervision |")
+    lines.append("| Social Engineering Attack | Social engineering via Agent sharing | §3.8 | Never share Agent/tokens/pairing codes |")
+    lines.append("| Message Metadata Leakage | Communication patterns reveal work habits | §3.9 | Regularly clean logs + use local models |")
+    lines.append("| IPv4 Octal SSRF Bypass | 0177.0.0.1 bypasses internal network detection | §9.6 | Keep OpenClaw version up to date |")
     lines.append("")
 
     # §9.3 Checklist
     if checklist:
-        lines.append("## 附录: §9.3 定期检查清单对照表")
+        lines.append("## Appendix: §9.3 Periodic Checklist Cross-Reference")
         lines.append("")
         lines.append(_generate_checklist(results))
 
@@ -293,33 +293,33 @@ def _generate_checklist(results):
     result_map = {r["id"]: r for r in results}
 
     checklist_items = [
-        ("1", "网关令牌定期轮换", "GW-013"),
-        ("2", "所有通道 allowFrom 白名单", "CH-001"),
-        ("3", "allowFrom 使用数字 ID", "CH-002"),
-        ("4", "dmPolicy 为 pairing", "CH-003"),
-        ("5", "exec.mode 为 ask", "AB-001"),
-        ("6", "网关绑定 loopback", "GW-005"),
-        ("7", "Docker Socket 未挂载", "SB-001"),
-        ("8", "会话日志清理", "SM-003"),
-        ("9", "凭证文件权限 600/700", "FP-001"),
-        ("10", "Skill 审查（新安装）", "SK-001"),
-        ("11", "npm audit 无 CVE", "SK-011"),
-        ("12", "端口仅监听 loopback", "NE-001"),
-        ("13", ".env 无明文密钥", "CL-004"),
-        ("14", "遥测已禁用", "GW-010"),
-        ("15", "debug 模式关闭", "GW-009"),
-        ("16", "OAuth 令牌轮换", "CL-005"),
-        ("17", "配置文件不可变标记", "FP-007"),
-        ("18", "不在云同步目录", "FP-008"),
-        ("19", "不在 git 仓库中", "FP-009"),
-        ("20", "出站 URL 白名单", "AB-007"),
-        ("21", "MEMORY.md 无注入", "SM-001"),
-        ("22", "Windows Node.js 版本", "WIN-001"),
+        ("1", "Gateway token periodic rotation", "GW-013"),
+        ("2", "All channels allowFrom whitelist", "CH-001"),
+        ("3", "allowFrom uses numeric IDs", "CH-002"),
+        ("4", "dmPolicy set to pairing", "CH-003"),
+        ("5", "exec.mode set to ask", "AB-001"),
+        ("6", "Gateway bound to loopback", "GW-005"),
+        ("7", "Docker Socket not mounted", "SB-001"),
+        ("8", "Session log cleanup", "SM-003"),
+        ("9", "Credential file permissions 600/700", "FP-001"),
+        ("10", "Skill review (new installs)", "SK-001"),
+        ("11", "npm audit no CVEs", "SK-011"),
+        ("12", "Ports listen on loopback only", "NE-001"),
+        ("13", ".env no plaintext secrets", "CL-004"),
+        ("14", "Telemetry disabled", "GW-010"),
+        ("15", "Debug mode off", "GW-009"),
+        ("16", "OAuth token rotation", "CL-005"),
+        ("17", "Config file immutable flag", "FP-007"),
+        ("18", "Not in cloud sync directory", "FP-008"),
+        ("19", "Not in git repository", "FP-009"),
+        ("20", "Outbound URL whitelist", "AB-007"),
+        ("21", "MEMORY.md no injection", "SM-001"),
+        ("22", "Windows Node.js version", "WIN-001"),
     ]
 
     lines = []
-    lines.append("| # | 检查项 | 对应审计 ID | 本次结果 |")
-    lines.append("|---|--------|-----------|---------|")
+    lines.append("| # | Check Item | Audit ID | Result |")
+    lines.append("|---|-----------|----------|--------|")
 
     for num, desc, check_id in checklist_items:
         r = result_map.get(check_id)
