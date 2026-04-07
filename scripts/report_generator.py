@@ -386,6 +386,7 @@ def generate_fix_script(results, meta):
     lines.append(f"# Auto-generated: {meta.get('audit_time', '')}")
     lines.append(f"# Audit Tool: v{TOOL_VERSION}")
     lines.append("#")
+    lines.append("# *** FOR REFERENCE ONLY ***")
     lines.append("# REVIEW BEFORE EXECUTING!")
     lines.append("# Some commands may require sudo or manual adjustment.")
     lines.append("")
