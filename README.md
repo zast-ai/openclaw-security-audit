@@ -119,9 +119,9 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ┌─────────┬──────────────────────────┬──────────┬──────────────┬────────────────────────────────────────────────────────┐
   │ Check ID│         Name             │ Severity │ Handbook Ref │                   Check Description                    │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
-  │ GW-001  │ auth.mode Not none       │ CRITICAL │ §2.1         │ Gateway auth mode must not be "none"                  │
+  │ GW-001  │ auth.mode Not none       │ CRITICAL │ §2.1         │ Gateway auth mode must not be "none"                   │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
-  │ GW-002  │ auth.mode Recommend token│ MEDIUM   │ §2.1         │ Recommended to use "token" mode                       │
+  │ GW-002  │ auth.mode Recommend token│ MEDIUM   │ §2.1         │ Recommended to use "token" mode                        │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
   │ GW-003  │ Token Uses secretRef     │ HIGH     │ §2.1         │ Token not stored in plaintext, uses env var reference  │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
@@ -151,13 +151,13 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ┌─────────┬──────────────────────────┬──────────┬──────────────┬────────────────────────────────────────────────────────┐
   │ Check ID│         Name             │ Severity │ Handbook Ref │                   Check Description                    │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
-  │ NE-001  │ Gateway Port 18789       │ CRITICAL │ §2.2         │ Port bind address must be 127.0.0.1                   │
+  │ NE-001  │ Gateway Port 18789       │ CRITICAL │ §2.2         │ Port bind address must be 127.0.0.1                    │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
   │ NE-002  │ CDP Port 9222            │ CRITICAL │ §7.4         │ Chrome DevTools Protocol port not exposed              │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
-  │ NE-003  │ VNC Port 5900            │ HIGH     │ §7.4         │ VNC port not exposed to network                       │
+  │ NE-003  │ VNC Port 5900            │ HIGH     │ §7.4         │ VNC port not exposed to network                        │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
-  │ NE-004  │ Extra Ports 18790/6080   │ MEDIUM   │ §2.2         │ Extra port bind address check                         │
+  │ NE-004  │ Extra Ports 18790/6080   │ MEDIUM   │ §2.2         │ Extra port bind address check                          │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
   │ NE-005  │ External Reachability    │ CRITICAL │ §2.3         │ Remote --remote HOST:PORT HTTP reachability probe      │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
@@ -165,7 +165,7 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
   │ NE-007  │ SSH Tunnel/Tailscale     │ INFO     │ §2.3         │ Detect SSH tunnel forwarding 18789 or active Tailscale │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
-  │ NE-008  │ ACP Port Binding         │ HIGH     │ §9.6         │ Ports 3000/3001/8080/8443 not exposed                 │
+  │ NE-008  │ ACP Port Binding         │ HIGH     │ §9.6         │ Ports 3000/3001/8080/8443 not exposed                  │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────┤
   │ NE-009  │ HTTP Proxy Env Vars      │ MEDIUM   │ §8.4         │ Proxy vars inherited by child processes affect sandbox │
   └─────────┴──────────────────────────┴──────────┴──────────────┴────────────────────────────────────────────────────────┘
@@ -179,7 +179,7 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ CH-002  │ Use Numeric IDs          │ MEDIUM   │ §3.4         │ allowFrom uses numeric IDs not usernames (anti-spoof)      │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
-  │ CH-003  │ dmPolicy Is pairing      │ HIGH     │ §3.2         │ DM policy must be "pairing" mode                          │
+  │ CH-003  │ dmPolicy Is pairing      │ HIGH     │ §3.2         │ DM policy must be "pairing" mode                           │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ CH-004  │ Email Channel Warning    │ HIGH     │ §3.11        │ Don't connect primary email, prevent handling OTP/reset    │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
@@ -189,9 +189,9 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ CH-007  │ Discord Message Intent   │ HIGH     │ §3.3         │ Message Content Intent not enabled / no admin permissions  │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
-  │ CH-008  │ Unofficial Connectors    │ MEDIUM   │ §3.7         │ WhatsApp/WeChat/Line reverse-protocol connector risks     │
+  │ CH-008  │ Unofficial Connectors    │ MEDIUM   │ §3.7         │ WhatsApp/WeChat/Line reverse-protocol connector risks      │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
-  │ CH-009  │ Paired Device Count      │ INFO     │ §3.8         │ Paired device/session count in channel                    │
+  │ CH-009  │ Paired Device Count      │ INFO     │ §3.8         │ Paired device/session count in channel                     │
   └─────────┴──────────────────────────┴──────────┴──────────────┴────────────────────────────────────────────────────────────┘
 
   Module 05: Credential Leak Detection (CL-001 ~ CL-008) — Attack Surfaces AS-6, AS-7
@@ -199,7 +199,7 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ┌─────────┬──────────────────────────┬──────────┬──────────────┬────────────────────────────────────────────────────────────┐
   │ Check ID│         Name             │ Severity │ Handbook Ref │                      Check Description                     │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
-  │ CL-001  │ API Keys in Session Logs │ CRITICAL │ §6.8         │ Search sessions/ for sk-/AKIA/sk-ant- patterns            │
+  │ CL-001  │ API Keys in Session Logs │ CRITICAL │ §6.8         │ Search sessions/ for sk-/AKIA/sk-ant- patterns             │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ CL-002  │ Passwords in Session Logs│ HIGH     │ §6.8         │ Search sessions/ for password/secret/private.key           │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
@@ -233,15 +233,15 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ SK-006  │ Code Obfuscation Detect  │ HIGH     │ §4.2         │ Shannon entropy >5.5 + Unicode homoglyphs (Cyrillic spoof) │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
-  │ SK-007  │ Auto-Start Events        │ MEDIUM   │ §4.3         │ Detect onStartup/activationEvents/autostart registration  │
+  │ SK-007  │ Auto-Start Events        │ MEDIUM   │ §4.3         │ Detect onStartup/activationEvents/autostart registration   │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ SK-008  │ Network Request Patterns │ HIGH     │ §4.4         │ Detect fetch/axios/urllib/requests/curl (staged payloads)  │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ SK-009  │ Version Lock/Auto-Update │ MEDIUM   │ §4.5         │ Whether version lock file exists, auto-update enabled      │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
-  │ SK-010  │ curl|bash Install History│ HIGH     │ §9.5         │ Search shell history for curl|bash / wget|sh unsafe installs│
+  │ SK-010  │ curl|bash Install History│ HIGH     │ §9.5         │ Search shell history for curl|bash/ wget|sh unsafe installs│
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
-  │ SK-011  │ npm audit CVE            │ HIGH     │ §9.1         │ Run npm audit on Skill npm deps, detect known vulns       │
+  │ SK-011  │ npm audit CVE            │ HIGH     │ §9.1         │ Run npm audit on Skill npm deps, detect known vulns        │
   ├─────────┼──────────────────────────┼──────────┼──────────────┼────────────────────────────────────────────────────────────┤
   │ SK-012  │ Unused Skills            │ INFO     │ §9.3         │ Skills not accessed for 90+ days, reduce attack surface    │
   └─────────┴──────────────────────────┴──────────┴──────────────┴────────────────────────────────────────────────────────────┘
@@ -295,21 +295,21 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ┌─────────┬──────────────────────────┬─────────────┬──────────────┬──────────────────────────────────────────────────────────────┐
   │ Check ID│         Name             │  Severity   │ Handbook Ref │                       Check Description                      │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-001  │ exec.mode Is ask         │ CRITICAL    │ §5.5         │ Agent must confirm with user before executing, not "allow"  │
+  │ AB-001  │ exec.mode Is ask         │ CRITICAL    │ §5.5         │ Agent must confirm with user before executing, not "allow"   │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-002  │ sandbox.mode Config      │ HIGH        │ §7.1         │ Sandbox mode should be docker/sandbox/container             │
+  │ AB-002  │ sandbox.mode Config      │ HIGH        │ §7.1         │ Sandbox mode should be docker/sandbox/container              │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-003  │ Message Send Limit       │ MEDIUM      │ §10.4        │ Configure message rate limit, prevent infinite messaging    │
+  │ AB-003  │ Message Send Limit       │ MEDIUM      │ §10.4        │ Configure message rate limit, prevent infinite messaging     │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-004  │ API Spend Limit Alert    │ INFO        │ §10.3        │ Detect OpenAI/Anthropic API Keys, remind monthly cap setup  │
+  │ AB-004  │ API Spend Limit Alert    │ INFO        │ §10.3        │ Detect OpenAI/Anthropic API Keys, remind monthly cap setup   │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-005  │ MCP Server Audit         │ HIGH/MEDIUM │ §5.3         │ List configured MCP server count, each is an exec surface   │
+  │ AB-005  │ MCP Server Audit         │ HIGH/MEDIUM │ §5.3         │ List configured MCP server count, each is an exec surface    │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-006  │ Document Processing Cfg  │ HIGH        │ §3.12        │ Whether format stripping enabled (anti white-text/OCR inj)  │
+  │ AB-006  │ Document Processing Cfg  │ HIGH        │ §3.12        │ Whether format stripping enabled (anti white-text/OCR inj)   │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-007  │ Outbound URL Whitelist   │ HIGH        │ §8.2         │ web_fetch has URL whitelist configured (anti data exfil)    │
+  │ AB-007  │ Outbound URL Whitelist   │ HIGH        │ §8.2         │ web_fetch has URL whitelist configured (anti data exfil)     │
   ├─────────┼──────────────────────────┼─────────────┼──────────────┼──────────────────────────────────────────────────────────────┤
-  │ AB-008  │ Financial API Key Alert  │ CRITICAL    │ §10.1        │ Detect Stripe/PayPal/Crypto Keys, require dual-sign approve │
+  │ AB-008  │ Financial API Key Alert  │ CRITICAL    │ §10.1        │ Detect Stripe/PayPal/Crypto Keys, require dual-sign approve  │
   └─────────┴──────────────────────────┴─────────────┴──────────────┴──────────────────────────────────────────────────────────────┘
 
   Module 10: System Persistence (SP-001 ~ SP-004) — Attack Surface AS-5
@@ -340,7 +340,7 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   27 Threat ID Mappings
 
   ┌───────────────┬────────────────────────────────────────┬────────────────────────────────────────┐
-  │   Threat ID   │                 Name                   │            Associated Checks            │
+  │   Threat ID   │                 Name                   │            Associated Checks           │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
   │ T-RECON-001   │ Public API Reconnaissance              │ NE-005, GW-005, GW-006                 │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
@@ -350,7 +350,7 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
   │ T-ACCESS-001  │ Gateway Auth Bypass (none mode)        │ GW-001, GW-002                         │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
-  │ T-ACCESS-002  │ Config Exposure Token Theft             │ GW-003, GW-004, CL-006                 │
+  │ T-ACCESS-002  │ Config Exposure Token Theft             │ GW-003, GW-004, CL-006                │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
   │ T-ACCESS-003  │ trusted-proxy Bypass                   │ GW-007                                 │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
@@ -388,7 +388,7 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
   │ T-DISC-003    │ Git Repo Credential Leak               │ FP-009                                 │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
-  │ T-DISC-004    │ Shell History Credential Leak           │ CL-008                                 │
+  │ T-DISC-004    │ Shell History Credential Leak           │ CL-008                                │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
   │ T-EXFIL-001   │ web_fetch Outbound Data Exfiltration   │ AB-007, SB-003                         │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
@@ -396,7 +396,7 @@ python3 scripts/openclaw_audit.py --remote 192.168.1.100:18789 --fix
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
   │ T-EXFIL-003   │ Skill Credential Theft                 │ SK-003, SK-005                         │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
-  │ T-IMPACT-001  │ Financial API Unauthorized Access       │ AB-008                                 │
+  │ T-IMPACT-001  │ Financial API Unauthorized Access       │ AB-008                                │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
   │ T-IMPACT-002  │ Agent Message Spam/Abuse               │ AB-003                                 │
   ├───────────────┼────────────────────────────────────────┼────────────────────────────────────────┤
