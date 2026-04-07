@@ -10,7 +10,7 @@
 [![Zero LLM Dependency](https://img.shields.io/badge/LLM_dependency-zero-brightgreen.svg)]()
 [![ZAST.AI](https://img.shields.io/badge/based_on-ZAST.AI_Handbook-orange.svg)]()
 
-Based on the [ZAST.AI Security Handbook](reference/) &mdash; 100% deterministic, fully reproducible results.
+Based on the [ZAST.AI Security Handbook](https://github.com/zast-ai/openclaw-security) &mdash; 100% deterministic, fully reproducible results.
 
 </div>
 
@@ -462,11 +462,11 @@ Simply run  /openclaw-security-audit
   ┌────────┬──────────────────────────────────────────┐
   │ Module │              Check Content               │
   ├────────┼──────────────────────────────────────────┤
-  │ 01     │ File System Permissions                   │
+  │ 01     │ File System Permissions                  │
   ├────────┼──────────────────────────────────────────┤
   │ 02     │ Gateway Configuration                    │
   ├────────┼──────────────────────────────────────────┤
-  │ 03     │ Network Port Exposure (local bind check)  │
+  │ 03     │ Network Port Exposure (local bind check) │
   ├────────┼──────────────────────────────────────────┤
   │ 04     │ Channel Configuration                    │
   ├────────┼──────────────────────────────────────────┤
@@ -515,13 +515,6 @@ Simply run  /openclaw-security-audit
   /openclaw-security-audit --fix --json --checklist
 ```
 
-### Screenshot
-
-![local](img/local.jpg)
-
-### Sample Report
-
-[Sample Report Here](sample_report.md)
 
 ---
 
@@ -621,8 +614,5 @@ Docker checks use --docker-name to specify the container name:
   - JSON report (when --json is used)
 ```
 
-### Screenshot
-
-![remote](img/remote.jpg)
 
 ---
