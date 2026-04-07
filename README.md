@@ -1,6 +1,6 @@
 <div align="center">
 
-# OpenClaw Security Audit
+# OpenClaw Security Audit Skill
 
 **Comprehensive security audit tool for OpenClaw instances**
 
